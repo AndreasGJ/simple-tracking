@@ -1,0 +1,21 @@
+{
+    "name": "simple-tracking",
+    "version": "0.0.1",
+    "description": "Simple tracking library which is complient for all analytics setup",
+    "main": "index.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/AndreasGJ/simple-tracking"
+    },
+    "keywords": [
+        "tracking",
+        "promise",
+        "javascript"
+    ],
+    "author": "Andreas Gade Jensen",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/AndreasGJ/simple-tracking/issues"
+    },
+    "homepage": "https://github.com/AndreasGJ/simple-tracking"
+}
