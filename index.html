@@ -11,23 +11,27 @@
         // Send tracking for pageview here
         console.log("pageview executed:", data);
       });
-      tracker.subscribe("event/tester-event-name", function(data) {
-        // Send tracking for event/tester-event-name here
-        console.log("event/tester-event-name executed:", data);
+      tracker.subscribe("event/click-me-button", function(data) {
+        // Send tracking for event/click-me-button here
+        console.log("event/click-me-button:", data);
       });
+
+      function clickme() {
+        tracker.event("click-me-button", {
+          some: "data"
+        });
+      }
     </script>
   </head>
   <body>
-    <p>Tester det lige</p>
+    <div>
+      <h1>Hallo world</h1>
+      <button onclick="clickme()" type="button">Click me</button>
+    </div>
     <script>
       // execute a pageview
       tracker.pageview({
         title: "Hallo world"
-      });
-
-      // execute an event
-      tracker.event("tester-event-name", {
-        some: "data"
       });
     </script>
   </body>
