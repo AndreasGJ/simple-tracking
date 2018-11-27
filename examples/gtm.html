@@ -1,0 +1,52 @@
+<html>
+  <head>
+    <title>GTM</title>
+    <script>
+      var dataLayer = window.dataLayer || [];
+    </script>
+    <script src="INSERT-GTM-SCRIPT-HERE"></script>
+    <script src="./dist/simple-tracking.min.js"></script>
+    <script>
+      var tracker = Tracker.create({
+        // Insert settings here
+      });
+
+      tracker.subscribe("pageview", function(data) {
+        // Send tracking for pageview here
+        dataLayer.push({
+          event: "pageview",
+          title: data.title
+        });
+      });
+      tracker.subscribe("event/click-me-button", function(data) {
+        // Send tracking for event/click-me-button here
+        dataLayer.push({
+          event: "event",
+          eventCategory: data.eventCategory,
+          eventAction: data.eventAction,
+          eventLabel: data.eventLabel
+        });
+      });
+
+      function clickme() {
+        tracker.event("click-me-button", {
+          eventCategory: "category",
+          eventAction: "action",
+          eventLabel: "label"
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <div>
+      <h1>GTM page</h1>
+      <button onclick="clickme()" type="button">Click me</button>
+    </div>
+    <script>
+      // execute a pageview
+      tracker.pageview({
+        title: "GTM page"
+      });
+    </script>
+  </body>
+</html>
