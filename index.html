@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <title>Hallo world</title>
+    <script src="./dist/simple-tracking.min.js"></script>
+    <script>
+      var tracker = Tracker.create({
+        // Insert settings here
+      });
+
+      tracker.subscribe("pageview", function(data) {
+        // Send tracking for pageview here
+        console.log("pageview executed:", data);
+      });
+      tracker.subscribe("event/click-me-button", function(data) {
+        // Send tracking for event/click-me-button here
+        console.log("event/click-me-button:", data);
+      });
+
+      function clickme() {
+        tracker.event("click-me-button", {
+          some: "data"
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <div>
+      <h1>Hallo world</h1>
+      <button onclick="clickme()" type="button">Click me</button>
+    </div>
+    <script>
+      // execute a pageview
+      tracker.pageview({
+        title: "Hallo world"
+      });
+    </script>
+  </body>
+</html>
