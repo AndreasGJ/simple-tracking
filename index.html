@@ -2,8 +2,33 @@
   <head>
     <title>Hallo world</title>
     <script src="./dist/simple-tracking.min.js"></script>
+    <script>
+      var tracker = Tracker.create({
+        // Insert settings here
+      });
+
+      tracker.subscribe("pageview", function(data) {
+        // Send tracking for pageview here
+        console.log("pageview executed:", data);
+      });
+      tracker.subscribe("event/tester-event-name", function(data) {
+        // Send tracking for event/tester-event-name here
+        console.log("event/tester-event-name executed:", data);
+      });
+    </script>
   </head>
   <body>
     <p>Tester det lige</p>
+    <script>
+      // execute a pageview
+      tracker.pageview({
+        title: "Hallo world"
+      });
+
+      // execute an event
+      tracker.event("tester-event-name", {
+        some: "data"
+      });
+    </script>
   </body>
 </html>

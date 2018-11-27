@@ -119,7 +119,7 @@
 	 * @param {Object} data The data specific for this event
 	 */
 	Tracker.prototype.event = function event(eventName, data) {
-	  return Listeners.publish(eventName, data);
+	  return Listeners.publish("event/" + eventName, data);
 	};
 
 	/**
