@@ -1,21 +1,46 @@
 {
-    "name": "simple-tracking",
-    "version": "0.0.1",
-    "description": "Simple tracking library which is complient for all analytics setup",
-    "main": "index.js",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/AndreasGJ/simple-tracking"
-    },
-    "keywords": [
-        "tracking",
-        "promise",
-        "javascript"
-    ],
-    "author": "Andreas Gade Jensen",
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/AndreasGJ/simple-tracking/issues"
-    },
-    "homepage": "https://github.com/AndreasGJ/simple-tracking"
+  "name": "simple-tracking",
+  "version": "0.0.1",
+  "description": "Simple tracking library which is complient for all analytics setup",
+  "main": "index.js",
+  "scripts": {
+    "all": "npm run build",
+    "build": "npm run build:lib && npm run build:dist",
+    "build:lib": "babel src --out-dir lib",
+    "build:dist": "npm run build:dist:max && npm run build:dist:min",
+    "build:dist:max": "cross-env NODE_ENV=development webpack src/global.js dist/simple-tracking.js",
+    "build:dist:min": "cross-env NODE_ENV=production webpack src/global.js dist/simple-tracking.min.js",
+    "prepublishOnly": "npm run all"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AndreasGJ/simple-tracking"
+  },
+  "keywords": [
+    "tracking",
+    "promise",
+    "javascript"
+  ],
+  "author": "Andreas Gade Jensen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AndreasGJ/simple-tracking/issues"
+  },
+  "homepage": "https://github.com/AndreasGJ/simple-tracking",
+  "devDependencies": {
+    "babel-cli": "^6.10.1",
+    "babel-core": "^6.9.1",
+    "babel-eslint": "^7.0.0",
+    "babel-loader": "^6.4.1",
+    "cross-env": "^3.0.0",
+    "es5-shim": "^4.5.9",
+    "eslint": "^3.6.0",
+    "webpack": "^1.13.1"
+  },
+  "lint-staged": {
+    "src/**/*.js": [
+      "eslint --fix",
+      "git add"
+    ]
+  }
 }
