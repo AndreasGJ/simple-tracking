@@ -112,6 +112,8 @@
 	Tracker.prototype.pageview = function pageview(data) {
 	  return Listeners.publish("pageview", data);
 	};
+	// Alias for pageview
+	Tracker.prototype.pv = Tracker.prototype.pageview;
 
 	/**
 	 * Dispatch a event
@@ -121,6 +123,8 @@
 	Tracker.prototype.event = function event(eventName, data) {
 	  return Listeners.publish("event/" + eventName, data);
 	};
+	// Alias for event
+	Tracker.prototype.ev = Tracker.prototype.event;
 
 	/**
 	 * Dispatch a event
@@ -130,6 +134,8 @@
 	Tracker.prototype.subscribe = function subscribe(eventName, callback) {
 	  return Listeners.subscribe(eventName, callback);
 	};
+	// Alias for subscribe
+	Tracker.prototype.sub = Tracker.prototype.subscribe;
 
 	module.exports = Tracker;
 

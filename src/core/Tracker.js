@@ -14,12 +14,29 @@ function Tracker() {
 }
 
 /**
+ * Set data for next page view
+ *
+ * @param {Object} data The data for the next pageview
+ */
+Tracker.prototype.setData = function setData(data) {
+  this.defaults.nextPageView = Object.assign({}, data);
+  return true;
+};
+// Alias for pageview
+Tracker.prototype.sd = Tracker.prototype.setData;
+
+/**
  * Dispatch a pageview
  *
  * @param {Object} data The data specific for this pageview
  */
 Tracker.prototype.pageview = function pageview(data) {
-  return Listeners.publish("pageview", data);
+  const d = this.defaults.nextPageView
+    ? Object.assign({}, this.defaults.nextPageView)
+    : {};
+  this.defaults.nextPageView = {};
+
+  return Listeners.publish("pageview", Object.assign({}, d, data));
 };
 // Alias for pageview
 Tracker.prototype.pv = Tracker.prototype.pageview;
