@@ -1,6 +1,6 @@
 {
   "name": "simple-tracking",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Simple tracking library which is complient for all analytics setup",
   "main": "index.js",
   "scripts": {
