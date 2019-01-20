@@ -11,6 +11,7 @@ var Listeners = require("./Listeners");
 function Tracker() {
   var instanceConfig = typeof arguments[0] == "object" ? arguments[0] : {};
   this.defaults = Object.assign({}, defaults, instanceConfig);
+  this.listener = Listeners(this.defaults);
 }
 
 /**
@@ -36,7 +37,7 @@ Tracker.prototype.pageview = function pageview(data) {
     : {};
   this.defaults.nextPageView = {};
 
-  return Listeners.publish("pageview", Object.assign({}, d, data));
+  return this.listener.publish("pageview", Object.assign({}, d, data));
 };
 // Alias for pageview
 Tracker.prototype.pv = Tracker.prototype.pageview;
@@ -47,7 +48,7 @@ Tracker.prototype.pv = Tracker.prototype.pageview;
  * @param {Object} data The data specific for this event
  */
 Tracker.prototype.event = function event(eventName, data) {
-  return Listeners.publish("event/" + eventName, data);
+  return this.listener.publish("event/" + eventName, data);
 };
 // Alias for event
 Tracker.prototype.ev = Tracker.prototype.event;
@@ -58,7 +59,7 @@ Tracker.prototype.ev = Tracker.prototype.event;
  * @param {Object} data The data specific for this event
  */
 Tracker.prototype.subscribe = function subscribe(eventName, callback) {
-  return Listeners.subscribe(eventName, callback);
+  return this.listener.subscribe(eventName, callback);
 };
 // Alias for subscribe
 Tracker.prototype.sub = Tracker.prototype.subscribe;

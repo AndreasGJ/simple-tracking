@@ -1,4 +1,5 @@
 var defaults = {
+  debug: false,
   nextPageView: {}
 };
 
