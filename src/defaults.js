@@ -1,6 +1,7 @@
 var defaults = {
   debug: false,
-  nextPageView: {}
+  nextPageView: {},
+  pageDelay: 200
 };
 
 module.exports = defaults;
