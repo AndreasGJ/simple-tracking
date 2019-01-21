@@ -123,12 +123,21 @@
 	 * @param {Object} data The data specific for this pageview
 	 */
 	Tracker.prototype.pageview = function pageview(data) {
-	  const d = this.defaults.nextPageView
-	    ? Object.assign({}, this.defaults.nextPageView)
-	    : {};
-	  this.defaults.nextPageView = {};
+	  const t = this;
+	  const delay = this.defaults.pageDelay || 0;
 
-	  return this.listener.publish("pageview", Object.assign({}, d, data));
+	  return new Promise(function(resolve, reject) {
+	    setTimeout(() => {
+	      const d = t.defaults.nextPageView
+	        ? Object.assign({}, t.defaults.nextPageView, data)
+	        : data;
+	      t.defaults.nextPageView = {};
+	      t.listener
+	        .publish("pageview", d)
+	        .then(resolve)
+	        .catch(reject);
+	    }, delay);
+	  });
 	};
 	// Alias for pageview
 	Tracker.prototype.pv = Tracker.prototype.pageview;
@@ -164,7 +173,8 @@
 
 	var defaults = {
 	  debug: false,
-	  nextPageView: {}
+	  nextPageView: {},
+	  pageDelay: 200
 	};
 
 	module.exports = defaults;
