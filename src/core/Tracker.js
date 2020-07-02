@@ -21,6 +21,9 @@ function Tracker() {
  */
 Tracker.prototype.setData = function setData(data) {
   this.defaults.nextPageView = Object.assign({}, data);
+  if(typeof this.defaults.onSetData === "function"){
+    this.defaults.onSetData(data);
+  }
   return true;
 };
 // Alias for pageview
@@ -34,6 +37,9 @@ Tracker.prototype.sd = Tracker.prototype.setData;
 Tracker.prototype.pageview = function pageview(data) {
   const t = this;
   const delay = this.defaults.pageDelay || 0;
+  if(typeof this.defaults.onPageview === "function"){
+    this.defaults.onPageview(data);
+  }
 
   return new Promise(function(resolve, reject) {
     setTimeout(() => {
@@ -57,7 +63,10 @@ Tracker.prototype.pv = Tracker.prototype.pageview;
  * @param {Object} data The data specific for this event
  */
 Tracker.prototype.event = function event(eventName, data) {
-  return this.listener.publish("event/" + eventName, data);
+    if(typeof this.defaults.onEvent === "function"){
+        this.defaults.onEvent(eventName, data);
+    }
+    return this.listener.publish("event/" + eventName, data);
 };
 // Alias for event
 Tracker.prototype.ev = Tracker.prototype.event;
