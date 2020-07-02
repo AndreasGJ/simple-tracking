@@ -1,1 +1,3 @@
-module.export = require("./tracking");
+import T from "./tracking";
+
+export default T;
